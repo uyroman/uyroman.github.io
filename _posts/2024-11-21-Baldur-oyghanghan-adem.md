@@ -29,7 +29,6 @@ Hello
 
 
 <script>
-// createAudioPlayers("#book_wrapper", "/assets/mp3/Baldur_oyghanghan_adem/Baldur_oyghanghan_adem_", 16);
 createAudioPlayers("#book_wrapper", "https://uyroman.github.io/mp3_data/Baldur_oyghanghan_adem/Baldur_oyghanghan_adem_", 16);
 </script>
 
