@@ -1,0 +1,82 @@
+<!--
+  JS selector for site.
+-->
+
+<!-- layout specified -->
+
+{% if page.layout == 'post' %}
+{% if site.google_analytics.pv.proxy_endpoint or site.google_analytics.pv.cache_path %}
+<!-- pv-report needs countup.js -->
+<script async src="/assets/jsdelivr/countUp.min.js"></script>
+<script defer src="{{ '/assets/js/dist/pvreport.min.js' | relative_url }}"></script>
+{% endif %}
+{% endif %}
+
+{% if page.layout == 'post' or page.layout == 'page' %}
+<!-- image lazy-loading & popup -->
+<script src="/assets/jsdelivr/clipboard.min.js"></script>
+{% endif %}
+
+{% if page.layout == 'home'
+or page.layout == 'categories'
+or page.layout == 'post'
+or page.layout == 'page' %}
+{% assign type = page.layout %}
+{% else %}
+{% assign type = "commons" %}
+{% endif %}
+
+{% assign js = type | prepend: '/assets/js/dist/' | append: '.min.js' %}
+<script defer src="{{ js | relative_url }}"></script>
+
+{% if page.math %}
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+      tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+      TeX: {
+          extensions: ["begingroup.js"],
+          noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, 
+          Macros: { href: "{}" } 
+      },
+      messageStyle: "none",
+      styles: { ".MathJax_Display, .MathJax_Preview, .MathJax_Preview > *": { "background": "inherit" } },
+      SEEditor: "mathjaxEditing"
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<!-- 
+<script>
+  /* see: <https://docs.mathjax.org/en/latest/options/input/tex.html#tex-options> */
+  MathJax = {
+    tex: {
+      inlineMath: [              /* start/end delimiter pairs for in-line math */
+        ['$', '$'],
+        ['\\(', '\\)']
+      ],
+      displayMath: [             /* start/end delimiter pairs for display math */
+        ['$$', '$$'],
+        ['\\[', '\\]']
+      ]
+    }
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script> -->
+{% endif %}
+
+<!-- commons -->
+
+<script src="/assets/jsdelivr/bootstrap.bundle.min.js"></script>
+
+{% if jekyll.environment == 'production' %}
+<!-- PWA -->
+<script defer src="{{ '/app.js' | relative_url }}"></script>
+
+<!-- GA -->
+{% if site.google_analytics.id %}
+{% include google-analytics.html %}
+{% endif %}
+
+{% endif %}
