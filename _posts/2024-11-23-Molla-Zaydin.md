@@ -4,7 +4,7 @@ author:
     name: تۆمۈر
     link: https://uyroman.github.io/
 date: 2024-11-21 12:10:00 +0800
-categories: [مەشھۇر شەخىسلەر]
+categories: [يارىخى رومان]
 tags: [رومان, تارىخ]
 image:
     src: /book_cover/Molla_Zaydin.png
